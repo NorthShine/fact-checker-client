@@ -1,11 +1,11 @@
-import { MainLayout } from 'components/MainLayout';
 import { Home } from 'pages/Home';
 import { Outlet } from 'react-router-dom';
+import { Main } from '../layouts/Main';
 
 export default [
   {
     path: '/',
-    element: <MainLayout />,
+    element: <Main />,
     children: [
       {
         path: '/',
