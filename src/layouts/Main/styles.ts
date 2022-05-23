@@ -7,7 +7,12 @@ const styles: Styles = {
     textAlign: 'center',
     color: theme.palette.getContrastText(theme.palette.primary.light),
     fontSize: 30
-  })
+  }),
+  container: {
+    padding: 20,
+    backgroundColor: '#9fa7d6',
+    borderRadius: '10px'
+  }
 };
 
 export default styles;
