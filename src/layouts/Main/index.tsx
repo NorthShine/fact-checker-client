@@ -1,3 +1,4 @@
+import { Navbar } from 'components/Navbar';
 import { useStyles } from 'hooks/useStyles';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
@@ -7,9 +8,8 @@ export const Main: React.FC = () => {
   const css = useStyles(styles, 'Main');
   return (
     <div css={css.root}>
-      <div css={css.container}>
-        <Outlet />
-      </div>
+      <Navbar />
+      <Outlet />
     </div>
   );
 };

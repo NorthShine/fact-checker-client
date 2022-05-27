@@ -1,12 +1,17 @@
 import { createTheme } from '@mui/material';
 
 export const theme = createTheme({
+  typography: {
+    fontFamily: 'Outfit, sans-serif;'
+  },
   palette: {
     primary: {
-      main: '#3f51b5'
+      main: '#6f6af8',
+      light: '#f8f8ff'
     },
     secondary: {
-      main: '#f50057'
+      main: '#ff4600',
+      dark: '#ff0076'
     }
   }
 });
