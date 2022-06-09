@@ -50,12 +50,10 @@ export interface AuthRequest {
 }
 
 export interface AuthResponse {
-  token: string;
+  access_token: string;
 }
 
 export interface ApiResponse {
   message: string;
   status: number;
 }
-
-export type AuthRequestStatus = 'idle' | 'loading' | 'ready' | 'error';

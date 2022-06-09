@@ -1,10 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { injectApiInterceptors } from '../api';
 import { authReducer } from './reducers/auth/authSlice';
 import { newsReducer } from './reducers/news/newsSlice';
+import { whitelistReducer } from './reducers/whitelist/whitelistSlice';
 
 const rootReducer = combineReducers({
   news: newsReducer,
-  auth: authReducer
+  auth: authReducer,
+  whitelist: whitelistReducer
 });
 
 export const setupStore = () => configureStore({
@@ -13,6 +16,8 @@ export const setupStore = () => configureStore({
 });
 
 export const store = setupStore();
+
+injectApiInterceptors(store);
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;

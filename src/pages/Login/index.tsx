@@ -49,6 +49,7 @@ export const Login: React.FC = () => {
           value={data.login}
           onChange={handleInputChange}
           name="login"
+          size="small"
           label="Введите логин"
           fullWidth
         />
@@ -58,6 +59,7 @@ export const Login: React.FC = () => {
           onChange={handleInputChange}
           name="password"
           type="password"
+          size="small"
           label="Введите пароль"
           fullWidth
         />

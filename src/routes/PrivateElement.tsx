@@ -7,11 +7,13 @@ interface PrivateRouteProps {
 }
 
 export const PrivateElement: React.FC<PrivateRouteProps> = ({ element }) => {
-  const { isAuth, status } = useAuth();
+  const { isAuth, requesting } = useAuth();
 
   if (isAuth) {
     return element;
   }
 
-  return status === 'ready' ? <Navigate to="/login" replace /> : null;
+  return requesting
+    ? null
+    : <Navigate to="/login" replace />;
 };

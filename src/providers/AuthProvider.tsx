@@ -1,10 +1,9 @@
 import React, { createContext, useMemo } from 'react';
-import { AuthRequestStatus } from 'types';
 import { useAppSelector } from '../hooks/useAppSelector';
 
 interface Context {
   isAuth: boolean;
-  status: AuthRequestStatus;
+  requesting: boolean;
 }
 
 interface AuthProviderProps {
@@ -13,17 +12,17 @@ interface AuthProviderProps {
 
 const initialAuthContext: Context = {
   isAuth: false,
-  status: 'idle'
+  requesting: false
 };
 
 export const AuthContext = createContext<Context>(initialAuthContext);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const { token, status } = useAppSelector((state) => state.auth);
+  const { token, requesting } = useAppSelector((state) => state.auth);
 
   const context = useMemo(() => ({
     isAuth: typeof token === 'string',
-    status
+    requesting
   }), []);
 
   return (

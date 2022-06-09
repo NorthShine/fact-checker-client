@@ -53,6 +53,7 @@ export const Home: React.FC = () => {
           <GradientButton
             variant="contained"
             color="secondary"
+            shadowed
             fullWidth
           >
             Проверить
