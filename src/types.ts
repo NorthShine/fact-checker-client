@@ -1,12 +1,8 @@
 import { CSSObject } from '@emotion/react';
 import { Theme } from '@mui/material/styles';
 
-export interface ApiError {
-  message: string;
-  status: number;
-}
+// styles
 
-// Re-declare the emotion theme to have the properties of the MaterialUiTheme
 declare module '@emotion/react' {
   export interface CustomTheme extends Theme { }
 }
@@ -18,3 +14,48 @@ export type Style = ThemeCallback | CSSObject;
 export interface Styles {
   [key: string]: Style;
 }
+
+// api
+
+export interface ApiError {
+  message: string | undefined;
+  status: number | undefined;
+}
+
+export interface WhitelistItem {
+  id: number;
+  url: string;
+}
+
+export interface PatchWhitelistItemData {
+  new_url: string;
+}
+
+export interface PatchWhitelistItemRequest {
+  id: number,
+  data: PatchWhitelistItemData
+}
+
+export interface UrlRequest {
+  url: string;
+}
+
+export interface TextRequest {
+  url: string;
+}
+
+export interface AuthRequest {
+  login: string;
+  password: string;
+}
+
+export interface AuthResponse {
+  token: string;
+}
+
+export interface ApiResponse {
+  message: string;
+  status: number;
+}
+
+export type AuthRequestStatus = 'idle' | 'loading' | 'ready' | 'error';

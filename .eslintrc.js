@@ -50,6 +50,9 @@ module.exports = {
     'react/prefer-stateless-function': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
-    'default-param-last': 'off'
+    'default-param-last': 'off',
+    'no-param-reassign': 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-no-constructed-context-values': 'off'
   }
 };

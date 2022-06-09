@@ -38,7 +38,12 @@ const createButtonStyles = (variant: keyof Palette) => (theme: Theme): CSSObject
 
 const styles: Styles = {
   primary: createButtonStyles('primary'),
-  secondary: createButtonStyles('secondary')
+  secondary: createButtonStyles('secondary'),
+  noShadow: {
+    '&:before': {
+      content: 'none'
+    }
+  }
 };
 
 export default styles;

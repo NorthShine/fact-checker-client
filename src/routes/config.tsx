@@ -1,5 +1,6 @@
 import { Home } from 'pages/Home';
-import { Outlet } from 'react-router-dom';
+import { Login } from 'pages/Login';
+import { Result } from 'pages/Result';
 import { Main } from '../layouts/Main';
 
 export default [
@@ -8,13 +9,13 @@ export default [
     element: <Main />,
     children: [
       {
-        path: '/',
-        element: <Outlet />,
-        children: [
-          {
-            path: '/', element: <Home />
-          }
-        ]
+        path: '/', element: <Home />
+      },
+      {
+        path: '/login', element: <Login />
+      },
+      {
+        path: '/result', element: <Result />
       }
     ]
   }
