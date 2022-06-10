@@ -1,5 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
 import { getAuthAction } from '../auth/actionCreators';
+import { checkTextAction, checkUrlAction } from '../news/actionCreators';
 import { addToWhitelistAction, deleteWhitelistItemAction, getWhitelistItemsAction } from '../whitelist/actionCreators';
 
 interface LoaderState {
@@ -37,4 +38,10 @@ export const loaderReducer = createReducer(initialState, (builder) => {
 
   builder.addCase(deleteWhitelistItemAction.pending, startLoading);
   builder.addCase(deleteWhitelistItemAction.rejected, stopLoading);
+
+  builder.addCase(checkUrlAction.pending, startLoading);
+  builder.addCase(checkUrlAction.rejected, stopLoading);
+
+  builder.addCase(checkTextAction.pending, startLoading);
+  builder.addCase(checkTextAction.rejected, stopLoading);
 });

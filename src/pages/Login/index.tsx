@@ -9,7 +9,7 @@ import { GradientButton } from '../../ui/GradientButton';
 import { getAuthAction } from '../../store/reducers/auth/actionCreators';
 
 interface AuthData {
-  login: string;
+  username: string;
   password: string;
 }
 
@@ -17,7 +17,7 @@ export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const css = useStyles(styles, 'Login');
   const [data, setData] = useState<AuthData>({
-    login: '',
+    username: '',
     password: ''
   });
 
@@ -35,17 +35,18 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <Container css={css.root} maxWidth="sm">
-      <form onSubmit={handleSubmit}>
-        <Typography css={css.title} variant="h5">Товарищ-майор, залогиньтесь</Typography>
+    <Container css={css.root}>
+      <form css={css.form} onSubmit={handleSubmit}>
+        <Typography css={css.title} variant="h5">Логин</Typography>
         <TextField
           css={css.input}
-          value={data.login}
+          value={data.username}
           onChange={handleInputChange}
-          name="login"
+          name="username"
           size="small"
-          label="Введите логин"
+          label="Введите username"
           fullWidth
+          required
         />
         <TextField
           css={css.input}
@@ -56,6 +57,7 @@ export const Login: React.FC = () => {
           size="small"
           label="Введите пароль"
           fullWidth
+          required
         />
         <GradientButton
           css={css.input}

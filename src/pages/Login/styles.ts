@@ -2,8 +2,9 @@ import type { Styles } from 'types';
 
 const styles: Styles = {
   root: {
-    paddingTop: 40,
-    textAlign: 'center'
+    paddingTop: 70,
+    textAlign: 'center',
+    maxWidth: 400
   },
   title: {
     marginBottom: 20

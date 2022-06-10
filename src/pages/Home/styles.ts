@@ -15,7 +15,13 @@ const styles: Styles = {
     backgroundColor: theme.palette.primary.light
   }),
   tabs: {
-    marginBottom: 20
+    marginBottom: 10
+  },
+  input: {
+    marginBottom: 20,
+    '&:last-of-type': {
+      marginBottom: 30
+    }
   }
 };
 

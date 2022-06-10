@@ -9,9 +9,10 @@ import { Divider } from '@mui/material';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useAlert } from 'hooks/useAlert';
 import { deleteWhitelistItemAction } from '../../store/reducers/whitelist/actionCreators';
+import { filteredWhitelistItemsSelector } from '../../store/reducers/selectors';
 
 export const Whitelist: React.FC = () => {
-  const whitelistItems = useAppSelector((state) => state.whitelist.items);
+  const whitelistItems = useAppSelector(filteredWhitelistItemsSelector);
   const dispatch = useAppDispatch();
   const alert = useAlert();
 

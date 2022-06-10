@@ -41,11 +41,13 @@ export interface UrlRequest {
 }
 
 export interface TextRequest {
-  url: string;
+  text: string;
+  title?: string;
+  author?: string;
 }
 
 export interface AuthRequest {
-  login: string;
+  username: string;
   password: string;
 }
 
