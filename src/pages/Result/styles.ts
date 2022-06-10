@@ -1,22 +1,14 @@
-import type { Styles } from 'types';
+import type { Styles } from "types";
 
 const styles: Styles = {
   root: {
     paddingTop: 40,
-    textAlign: 'center'
+    textAlign: "center",
   },
-  title: {
-    marginBottom: 20
+  header: {
+    width: "100%",
+    height: 30,
   },
-  subtitle: {
-    marginBottom: 40
-  },
-  tab: (theme) => ({
-    backgroundColor: theme.palette.primary.light
-  }),
-  tabs: {
-    marginBottom: 20
-  }
 };
 
 export default styles;
