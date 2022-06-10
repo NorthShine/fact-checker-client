@@ -1,47 +1,48 @@
-import { useContext } from 'react';
-import { AlertContext } from '../providers/AlertProvider';
+import { closeAlertAction, openAlertAction } from '../store/reducers/alert/alertReducer';
+import { useAppDispatch } from './useAppDispatch';
+import { useAppSelector } from './useAppSelector';
 
 export const useAlert = () => {
-  const {
-    open,
-    setOpen,
-    message,
-    setMessage,
-    severity,
-    setSeverity
-  } = useContext(AlertContext);
+  const { open, severity, message } = useAppSelector((state) => state.alert);
+  const dispatch = useAppDispatch();
+
+  function closeAlert() {
+    dispatch(closeAlertAction());
+  }
 
   function warning(msg: string) {
-    setOpen(true);
-    setMessage(msg ?? 'Warning');
-    setSeverity('warning');
+    dispatch(openAlertAction({
+      message: msg,
+      severity: 'warning'
+    }));
   }
 
   function error(msg: string) {
-    setOpen(true);
-    setMessage(msg ?? 'Error');
-    setSeverity('error');
+    dispatch(openAlertAction({
+      message: msg,
+      severity: 'error'
+    }));
   }
 
   function info(msg: string) {
-    setOpen(true);
-    setMessage(msg ?? 'Info');
-    setSeverity('info');
+    dispatch(openAlertAction({
+      message: msg,
+      severity: 'info'
+    }));
   }
 
   function success(msg: string) {
-    setOpen(true);
-    setMessage(msg ?? 'Success');
-    setSeverity('success');
+    dispatch(openAlertAction({
+      message: msg,
+      severity: 'success'
+    }));
   }
 
   return {
     open,
+    closeAlert,
     message,
     severity,
-    setOpen,
-    setMessage,
-    setSeverity,
     warning,
     success,
     info,

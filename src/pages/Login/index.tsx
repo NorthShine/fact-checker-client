@@ -4,7 +4,6 @@ import { useStyles } from 'hooks/useStyles';
 import TextField from '@mui/material/TextField';
 import React, { useCallback, useState } from 'react';
 import { useAppDispatch } from 'hooks/useAppDispatch';
-import { useAlert } from 'hooks/useAlert';
 import styles from './styles';
 import { GradientButton } from '../../ui/GradientButton';
 import { getAuthAction } from '../../store/reducers/auth/actionCreators';
@@ -15,7 +14,6 @@ interface AuthData {
 }
 
 export const Login: React.FC = () => {
-  const alert = useAlert();
   const dispatch = useAppDispatch();
   const css = useStyles(styles, 'Login');
   const [data, setData] = useState<AuthData>({
@@ -33,11 +31,7 @@ export const Login: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(getAuthAction(data))
-      .unwrap()
-      .catch((err) => {
-        alert.error(err.message);
-      });
+    dispatch(getAuthAction(data));
   };
 
   return (

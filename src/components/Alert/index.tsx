@@ -4,23 +4,21 @@ import { useMemo } from 'react';
 import { DEFAULT_ALERT_TIMEOUT } from '../../constants';
 
 export const Alert = () => {
-  const { open, setOpen, message, severity } = useAlert();
+  const { open, closeAlert, message, severity } = useAlert();
 
   const position: SnackbarOrigin = useMemo(() => ({
     vertical: 'top',
     horizontal: 'center'
   }), []);
 
-  const handleClose = () => setOpen(false);
-
   return (
     <Snackbar
       open={open}
       autoHideDuration={DEFAULT_ALERT_TIMEOUT}
-      onClose={() => setOpen(false)}
+      onClose={closeAlert}
       anchorOrigin={position}
     >
-      <Notification onClose={handleClose} severity={severity}>
+      <Notification onClose={closeAlert} severity={severity}>
         {message}
       </Notification>
     </Snackbar>

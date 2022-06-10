@@ -4,7 +4,7 @@ import api from '../../../api';
 
 export const getWhitelistItemsAction = createAsyncThunk<
   WhitelistItem[], void, { rejectValue: ApiResponse }>(
-    'auth/getAuthAction',
+    'whitelist/getWhitelistItems',
     async (_, { rejectWithValue }) => {
       try {
         const response = await api.getWhitelistItems();
@@ -21,7 +21,7 @@ export const getWhitelistItemsAction = createAsyncThunk<
 
 export const addToWhitelistAction = createAsyncThunk<
   WhitelistItem, UrlRequest, { rejectValue: ApiResponse }>(
-    'auth/addToWhitelistAction',
+    'auth/addToWhitelist',
     async (data, { rejectWithValue }) => {
       try {
         const response = await api.addToWhitelist(data);
@@ -38,7 +38,7 @@ export const addToWhitelistAction = createAsyncThunk<
 
 export const deleteWhitelistItemAction = createAsyncThunk<
   number, number, { rejectValue: ApiResponse }>(
-    'auth/deleteItemFromWhitelistAction',
+    'whitelist/deleteWhitelistItem',
     async (id, { rejectWithValue }) => {
       try {
         await api.deleteWhitelistItem(id);

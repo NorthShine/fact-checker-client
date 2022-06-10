@@ -4,7 +4,7 @@ import api from '../../../api';
 
 export const getAuthAction = createAsyncThunk<
   AuthResponse, AuthRequest, { rejectValue: ApiResponse }>(
-    'auth/getAuthAction',
+    'auth/getAuth',
     async (data, { rejectWithValue }) => {
       try {
         const response = await api.signin(data);
