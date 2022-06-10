@@ -15,7 +15,7 @@ const initialState: WhitelistState = {
 };
 
 export const whitelistSlice = createSlice({
-  name: 'auth',
+  name: 'whitelist',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
