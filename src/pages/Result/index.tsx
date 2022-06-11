@@ -26,11 +26,11 @@ export const Result: React.FC = () => {
   const css = useStyles(styles, "Result");
 
   return (
-    <Container css={css.root} maxWidth="sm">
+    <Container css={css.root} maxWidth="xl">
       <Container css={css.header}>
         <Typography css={css.headlineResult}>Результаты поиска:</Typography>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableContainer component={Paper} css={css.Tablecontainer}>
+          <Table sx={{ maxWidth: 450 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Параметр</TableCell>

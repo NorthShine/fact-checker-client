@@ -2,20 +2,30 @@ import type { Styles } from "types";
 
 const styles: Styles = {
   root: {
-    paddingTop: 40,
     textAlign: "center",
-    margin: "auto",
     display: "flex",
+    maxWidth: 1200,
+    height: "93%",
+
     justifyContent: "center",
   },
   header: (theme) => ({
     backgroundColor: theme.palette.primary.light,
-    height: 600,
-    width: 1000,
+    maxWidth: 1200,
+    margin: "auto",
+    height: "100%",
+    zIndex: -1,
   }),
   headlineResult: {
     textAlign: "left",
     padding: 15,
+    fontWeight: 700,
+    fontSize: 18,
+  },
+  Tablecontainer: {
+    width: 500,
+    margin: "auto",
+    marginTop: 20,
   },
 };
 
