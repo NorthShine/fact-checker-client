@@ -8,7 +8,7 @@ export const checkUrlAction = createAsyncThunk<
     async (data, { rejectWithValue }) => {
       try {
         const response = await api.checkURL(data);
-        return response.data;
+        return response.data.data;
       } catch (error) {
         const err = (error as ApiResponse);
         return rejectWithValue({
@@ -25,7 +25,7 @@ export const checkTextAction = createAsyncThunk<
     async (data, { rejectWithValue }) => {
       try {
         const response = await api.checkText(data);
-        return response.data;
+        return response.data.data;
       } catch (error) {
         const err = (error as ApiResponse);
         return rejectWithValue({

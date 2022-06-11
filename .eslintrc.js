@@ -35,6 +35,7 @@ module.exports = {
       exports: 'never',
       functions: 'never'
     }],
+    camelcase: 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     'import/no-anonymous-default-export': 'off',

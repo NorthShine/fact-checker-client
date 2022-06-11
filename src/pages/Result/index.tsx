@@ -1,7 +1,8 @@
 import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import { useStyles } from 'hooks/useStyles';
-
+import CheckIcon from '@mui/icons-material/Check';
+import CancelIcon from '@mui/icons-material/Cancel';
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,122 +10,55 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { useAppSelector } from 'hooks/useAppSelector';
+import { Navigate } from 'react-router-dom';
 import styles from './styles';
-
-const rows = [
-  {
-    is_trusted_url: true,
-    is_real_author: true,
-    article_url: null,
-    author: null,
-    title: null,
-    text: null
-  }
-];
 
 export const Result: React.FC = () => {
   const css = useStyles(styles, 'Result');
+  const { data } = useAppSelector((state) => state.news);
+
+  if (!data) {
+    return <Navigate to="/" />;
+  }
 
   return (
-    <Container css={css.root} maxWidth="xl">
-      <Container css={css.header}>
-        <Typography css={css.headlineResult}>Результаты поиска:</Typography>
-        <TableContainer component={Paper} css={css.Tablecontainer}>
-          <Table sx={{ maxWidth: 450 }} aria-label="simple table">
+    <Container css={css.root} maxWidth="sm">
+      <Typography css={css.title} variant="h5">Результаты проверки</Typography>
+      {data && (
+        <TableContainer>
+          <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Параметр</TableCell>
-                <TableCell align="right">Значение</TableCell>
+                <TableCell css={css.key}>Параметр</TableCell>
+                <TableCell css={css.key} align="center">Значение</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    is_trusted_url:
-                  </TableCell>
+              {Object.entries(data).map(([key, value]) => {
+                let result = value;
+                if (typeof value === 'boolean') {
+                  result = value
+                    ? <CheckIcon color="primary" />
+                    : <CancelIcon color="secondary" />;
+                }
+                return (
+                  <TableRow
+                    key={key}
+                    css={css.row}
+                  >
+                    <TableCell component="th" scope="row">
+                      {key}
+                    </TableCell>
 
-                  <TableCell align="right">true</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    is_real_author:
-                  </TableCell>
-
-                  <TableCell align="right">true</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    article_url:
-                  </TableCell>
-
-                  <TableCell align="right">string</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {' author:'}
-                  </TableCell>
-
-                  <TableCell align="right">string</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {' title:'}
-                  </TableCell>
-
-                  <TableCell align="right">string</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    text:
-                  </TableCell>
-
-                  <TableCell align="right">string</TableCell>
-                </TableRow>
-              ))}
+                    <TableCell align="center">{result}</TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
-      </Container>
+      )}
     </Container>
   );
 };

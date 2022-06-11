@@ -3,7 +3,7 @@ import {
   ApiResponse,
   AuthRequest,
   AuthResponse,
-  News,
+  NewsResponse,
   PatchWhitelistItemRequest,
   TextRequest,
   UrlRequest,
@@ -33,9 +33,9 @@ const addToWhitelist = (data: UrlRequest) => Api.post<WhitelistItem>('/api/admin
 
 // news fetching
 
-const checkURL = (data: UrlRequest) => Api.post<News>('/api/parser/url/', data);
+const checkURL = (data: UrlRequest) => Api.post<NewsResponse>('/api/parser/url/', data);
 
-const checkText = (data: TextRequest) => Api.post<News>('/api/parser/text/', data);
+const checkText = (data: TextRequest) => Api.post<NewsResponse>('/api/parser/text/', data);
 
 export const injectApiInterceptors = (store: AppStore) => {
   Api.interceptors.request.use(async (req) => {
