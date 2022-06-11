@@ -30,6 +30,10 @@ const styles: Styles = {
     display: '-webkit-box',
     '-webkit-line-clamp': '3',
     '-webkit-box-orient': 'vertical'
+  },
+  alert: {
+    marginTop: 20,
+    textAlign: 'left'
   }
 };
 

@@ -68,6 +68,7 @@ export interface News {
   author?: string;
   title?: string | null;
   text?: string;
+  is_article?: boolean;
 }
 
 export interface NewsResponse {

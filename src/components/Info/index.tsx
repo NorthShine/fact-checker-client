@@ -1,4 +1,4 @@
-import { Paper, Typography } from '@mui/material';
+import { Alert, Paper, Typography } from '@mui/material';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { useStyles } from 'hooks/useStyles';
 import React, { Suspense } from 'react';
@@ -24,6 +24,11 @@ export const Info: React.FC = () => {
             </a>
           )}
         <Typography align="left" css={css.text}>{data?.text}</Typography>
+        {(typeof data?.is_article === 'boolean' && !data.is_article) && (
+          <Alert css={css.alert} severity="error">
+            Источник не является статьей!
+          </Alert>
+        )}
       </Paper>
     </Suspense>
   );
