@@ -32,6 +32,19 @@ jobs:
                   script: |
                       cd app
                       npm i
+            - name: Creating .env file
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSHKEY }}
+                  envs: VITE_API_URL
+                  script: |
+                      cd app
+                      touch .env
+                      echo VITE_API_URL=${{ secrets.VITE_API_URL }} >> .env
+                      cat .env
             - name: Building the app
               uses: appleboy/ssh-action@master
               with:
