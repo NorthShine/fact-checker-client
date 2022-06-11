@@ -22,7 +22,16 @@ export const newsSlice = createSlice({
     builder.addCase(checkUrlAction.fulfilled, (state, action: PayloadAction<News>) => {
       state.requesting = false;
       state.error = null;
-      state.data = action.payload;
+      const {
+        is_real_author,
+        is_trusted_url,
+        is_real_article
+      } = action.payload;
+      state.data = {
+        is_real_author,
+        is_trusted_url,
+        is_real_article
+      };
     });
     builder.addCase(checkUrlAction.pending, (state) => {
       state.requesting = true;

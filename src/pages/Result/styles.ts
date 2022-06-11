@@ -8,14 +8,11 @@ const styles: Styles = {
   title: {
     marginBottom: 20
   },
-  subtitle: {
-    marginBottom: 40
+  row: {
+    '&:last-child td, &:last-child th': { border: 0 }
   },
-  tab: (theme) => ({
-    backgroundColor: theme.palette.primary.light
-  }),
-  tabs: {
-    marginBottom: 20
+  key: {
+    fontWeight: 'bold'
   }
 };
 
