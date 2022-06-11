@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material';
 
 export const theme = createTheme({
   typography: {
-    fontFamily: 'Outfit, sans-serif;'
+    fontFamily: 'Commissioner, sans-serif;'
   },
   palette: {
     primary: {

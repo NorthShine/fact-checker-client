@@ -1,4 +1,4 @@
-import '@fontsource/outfit';
+import '@fontsource/commissioner';
 import { Provider as StateProvider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
