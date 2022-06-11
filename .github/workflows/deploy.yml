@@ -64,4 +64,4 @@ jobs:
                     KEY: ${{ secrets.SSH_KEY }}
                     script: |
                         cd app
-                        npm run preview
+                        npm run preview & npx wait-on http://localhost:4176
