@@ -33,6 +33,7 @@ export const Admin: React.FC = () => {
     event.preventDefault();
     const data = { url };
     dispatch(addToWhitelistAction(data));
+    setUrl('');
   };
 
   return (

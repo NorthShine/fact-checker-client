@@ -17,11 +17,11 @@ const Api = axios.create({
 
 // auth
 
-const signin = (data: AuthRequest) => Api.post<AuthResponse | ApiResponse>('/api/admin/sign_in/', data);
+const signin = (data: AuthRequest) => Api.post<AuthResponse | ApiResponse>('/api/admin/sign_in', data);
 
 // whitelist
 
-const getWhitelistItems = () => Api.get<WhitelistItem[] | ApiResponse>('/api/admin/whitelist/');
+const getWhitelistItems = () => Api.get<WhitelistItem[] | ApiResponse>('/api/admin/whitelist');
 
 const getWhitelistItem = (id: number) => Api.get<WhitelistItem | ApiResponse>(`/api/admin/whitelist/${id}`);
 
@@ -29,13 +29,13 @@ const patchWhitelistItem = ({ id, data }: PatchWhitelistItemRequest) => Api.post
 
 const deleteWhitelistItem = (id: number) => Api.delete(`/api/admin/whitelist/${id}`);
 
-const addToWhitelist = (data: UrlRequest) => Api.post<WhitelistItem>('/api/admin/whitelist/', data);
+const addToWhitelist = (data: UrlRequest) => Api.post<WhitelistItem>('/api/admin/whitelist', data);
 
 // news fetching
 
-const checkURL = (data: UrlRequest) => Api.post<NewsResponse>('/api/parser/url/', data);
+const checkURL = (data: UrlRequest) => Api.post<NewsResponse>('/api/parser/url', data);
 
-const checkText = (data: TextRequest) => Api.post<NewsResponse>('/api/parser/text/', data);
+const checkText = (data: TextRequest) => Api.post<NewsResponse>('/api/parser/text', data);
 
 export const injectApiInterceptors = (store: AppStore) => {
   Api.interceptors.request.use(async (req) => {
