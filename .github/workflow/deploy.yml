@@ -51,4 +51,8 @@ jobs:
                     KEY: ${{ secrets.SSH_KEY }}
                     script: |
                         cd app
+<<<<<<< Updated upstream:.github/workflow/deploy.yml
                         npm run preview & npx wait-on http://localhost:4176
+=======
+                        pm2 restart app
+>>>>>>> Stashed changes:.github/workflows/deploy.yml

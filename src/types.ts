@@ -64,9 +64,9 @@ export interface News {
   is_trusted_url: boolean;
   is_real_author: boolean;
   is_real_article: boolean;
-  article_url?: string | null;
+  url?: string | null;
   author?: string;
-  title?: string;
+  title?: string | null;
   text?: string;
 }
 
