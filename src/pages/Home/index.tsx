@@ -8,6 +8,8 @@ import TabPanel from '@mui/lab/TabPanel';
 import TextField from '@mui/material/TextField';
 import React, { useCallback, useState } from 'react';
 import { useAppDispatch } from 'hooks/useAppDispatch';
+import { useAppSelector } from 'hooks/useAppSelector';
+import { Navigate } from 'react-router-dom';
 import styles from './styles';
 import { GradientButton } from '../../ui/GradientButton';
 import { checkTextAction, checkUrlAction } from '../../store/reducers/news/actionCreators';
@@ -19,6 +21,7 @@ export const Home: React.FC = () => {
   const [tab, setTab] = useState<TabType>('url');
   const css = useStyles(styles, 'Home');
   const dispatch = useAppDispatch();
+  const { data: news } = useAppSelector((state) => state.news);
   const [data, setData] = useState({
     url: '',
     text: '',
@@ -53,6 +56,10 @@ export const Home: React.FC = () => {
       author: data.author
     }));
   };
+
+  if (news) {
+    return <Navigate to="/result" />;
+  }
 
   return (
     <Container css={css.root} maxWidth="sm">
