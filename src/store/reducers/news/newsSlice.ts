@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ApiError } from '../../../types';
+import { ApiError, News } from '../../../types';
 import { checkTextAction, checkUrlAction } from './actionCreators';
 
 interface NewsState {
-  data: any;
+  data: News | null;
   requesting: boolean;
   error: ApiError | null | undefined;
 }
@@ -19,7 +19,7 @@ export const newsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(checkUrlAction.fulfilled, (state, action: PayloadAction<void>) => {
+    builder.addCase(checkUrlAction.fulfilled, (state, action: PayloadAction<News>) => {
       state.requesting = false;
       state.error = null;
       state.data = action.payload;
@@ -32,7 +32,7 @@ export const newsSlice = createSlice({
       state.error = action.payload;
     });
 
-    builder.addCase(checkTextAction.fulfilled, (state, action: PayloadAction<void>) => {
+    builder.addCase(checkTextAction.fulfilled, (state, action: PayloadAction<News>) => {
       state.requesting = false;
       state.error = null;
       state.data = action.payload;

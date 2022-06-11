@@ -8,12 +8,15 @@ import { useAppSelector } from 'hooks/useAppSelector';
 import { Divider } from '@mui/material';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useAlert } from 'hooks/useAlert';
+import { useStyles } from 'hooks/useStyles';
 import { deleteWhitelistItemAction } from '../../store/reducers/whitelist/actionCreators';
-import { filteredWhitelistItemsSelector } from '../../store/reducers/selectors';
+import { filteredWhitelistItemsSelector } from '../../store/selectors';
+import styles from './styles';
 
 export const Whitelist: React.FC = () => {
   const whitelistItems = useAppSelector(filteredWhitelistItemsSelector);
   const dispatch = useAppDispatch();
+  const css = useStyles(styles, 'Whitelist');
   const alert = useAlert();
 
   const handleDeleteItem = useCallback((id: number) => {
@@ -23,7 +26,7 @@ export const Whitelist: React.FC = () => {
   }, []);
 
   return (
-    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+    <List css={css.root}>
       {whitelistItems.map(({ url, id }) => (
         <React.Fragment key={id}>
           <ListItem

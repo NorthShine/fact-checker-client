@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAuthAction } from './actionCreators';
 import { ApiError, AuthResponse } from '../../../types';
 
@@ -14,11 +14,17 @@ const initialState: AuthState = {
   error: null
 };
 
+export const signOutAction = createAction('auth/signOut');
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(signOutAction, (state) => {
+      state.token = undefined;
+    });
+
     builder.addCase(getAuthAction.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
       state.requesting = false;
       state.error = null;

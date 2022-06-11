@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { WhitelistItem } from 'types';
-import { RootState } from '../..';
+import { RootState } from '..';
 
 export const whitelistItemsSelector = (state: RootState) => state.whitelist.items;
 export const whitelistFilteredItemIdsSelector = (state: RootState) => state.whitelist.filtered;

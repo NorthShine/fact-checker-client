@@ -4,6 +4,8 @@ import { useStyles } from 'hooks/useStyles';
 import TextField from '@mui/material/TextField';
 import React, { useCallback, useState } from 'react';
 import { useAppDispatch } from 'hooks/useAppDispatch';
+import { useAppSelector } from 'hooks/useAppSelector';
+import { Navigate } from 'react-router-dom';
 import styles from './styles';
 import { GradientButton } from '../../ui/GradientButton';
 import { getAuthAction } from '../../store/reducers/auth/actionCreators';
@@ -15,6 +17,7 @@ interface AuthData {
 
 export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { token } = useAppSelector((state) => state.auth);
   const css = useStyles(styles, 'Login');
   const [data, setData] = useState<AuthData>({
     username: '',
@@ -29,13 +32,17 @@ export const Login: React.FC = () => {
     }));
   }, []);
 
+  if (token) {
+    return <Navigate to="/admin" />;
+  }
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(getAuthAction(data));
   };
 
   return (
-    <Container css={css.root}>
+    <Container css={css.root} maxWidth={false}>
       <form css={css.form} onSubmit={handleSubmit}>
         <Typography css={css.title} variant="h5">Логин</Typography>
         <TextField

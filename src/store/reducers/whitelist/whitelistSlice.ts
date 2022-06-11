@@ -10,20 +10,7 @@ interface WhitelistState {
 }
 
 const initialState: WhitelistState = {
-  items: [
-    {
-      id: 0,
-      url: 'https://example.com'
-    },
-    {
-      id: 1,
-      url: 'https://url.com'
-    },
-    {
-      id: 2,
-      url: 'https://some.com'
-    }
-  ],
+  items: [],
   requesting: true,
   error: null,
   filtered: []

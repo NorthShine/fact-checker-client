@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../../api';
-import { ApiResponse, TextRequest, UrlRequest } from '../../../types';
+import { ApiResponse, News, TextRequest, UrlRequest } from '../../../types';
 
 export const checkUrlAction = createAsyncThunk<
-  void, UrlRequest, { rejectValue: ApiResponse }>(
+  News, UrlRequest, { rejectValue: ApiResponse }>(
     'news/checkUrl',
     async (data, { rejectWithValue }) => {
       try {
@@ -20,7 +20,7 @@ export const checkUrlAction = createAsyncThunk<
   );
 
 export const checkTextAction = createAsyncThunk<
-  void, TextRequest, { rejectValue: ApiResponse }>(
+  News, TextRequest, { rejectValue: ApiResponse }>(
     'news/checkText',
     async (data, { rejectWithValue }) => {
       try {

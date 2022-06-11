@@ -38,13 +38,15 @@ export const Home: React.FC = () => {
     }));
   }, []);
 
-  const handleUrlSubmit = () => {
+  const handleUrlSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
     dispatch(checkUrlAction({
       url: data.url
     }));
   };
 
-  const handleTextSubmit = () => {
+  const handleTextSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
     dispatch(checkTextAction({
       text: data.text,
       title: data.title,
