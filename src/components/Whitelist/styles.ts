@@ -1,10 +1,7 @@
 import type { Styles } from 'types';
 
 const styles: Styles = {
-  root: {
-    paddingTop: 40,
-    textAlign: 'center'
-  }
+  root: { width: '100%', bgcolor: 'background.paper' }
 };
 
 export default styles;

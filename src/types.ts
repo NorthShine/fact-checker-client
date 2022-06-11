@@ -41,11 +41,13 @@ export interface UrlRequest {
 }
 
 export interface TextRequest {
-  url: string;
+  text: string;
+  title?: string;
+  author?: string;
 }
 
 export interface AuthRequest {
-  login: string;
+  username: string;
   password: string;
 }
 
@@ -56,4 +58,14 @@ export interface AuthResponse {
 export interface ApiResponse {
   message: string;
   status: number;
+}
+
+export interface News {
+  is_trusted_url: boolean;
+  is_real_author: boolean;
+  is_real_article: boolean;
+  article_url: string | null;
+  author: string;
+  title: string;
+  text: string;
 }

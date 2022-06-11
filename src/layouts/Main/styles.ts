@@ -2,7 +2,7 @@ import type { Styles } from 'types';
 
 const styles: Styles = {
   root: {
-    height: '100%'
+    height: '100vh'
   },
   container: {
     padding: 20,

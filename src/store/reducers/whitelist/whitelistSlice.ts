@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { addToWhitelistAction, deleteWhitelistItemAction, getWhitelistItemsAction } from './actionCreators';
 import { ApiError, WhitelistItem } from '../../../types';
 
@@ -6,19 +6,34 @@ interface WhitelistState {
   items: WhitelistItem[];
   requesting: boolean;
   error: ApiError | null | undefined;
+  filtered: number[]
 }
 
 const initialState: WhitelistState = {
   items: [],
   requesting: true,
-  error: null
+  error: null,
+  filtered: []
 };
+
+export const filterWhitelistItemsAction = createAction<string>('whitelist/filterWhitelistItems');
 
 export const whitelistSlice = createSlice({
   name: 'whitelist',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(filterWhitelistItemsAction, (state, action) => {
+      const value = action.payload.toLowerCase();
+      state.filtered = state.items.reduce((acc: number[], item) => {
+        const url = item.url.toLowerCase();
+        if (url.includes(value)) {
+          acc.push(item.id);
+        }
+        return acc;
+      }, []);
+    });
+
     builder.addCase(
       getWhitelistItemsAction.fulfilled,
       (state, action: PayloadAction<WhitelistItem[]>) => {

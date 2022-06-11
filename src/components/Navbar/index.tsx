@@ -6,13 +6,22 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from 'hooks/useAppSelector';
+import { useDispatch } from 'react-redux';
 import { GradientButton } from '../../ui/GradientButton';
+import { signOutAction } from '../../store/reducers/auth/authSlice';
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token } = useAppSelector((state) => state.auth);
 
   const handleLogin = () => {
-    navigate('/login');
+    if (token) {
+      dispatch(signOutAction());
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
@@ -30,7 +39,7 @@ export const Navbar = () => {
             color="secondary"
             onClick={handleLogin}
           >
-            Войти
+            {token ? 'Выйти' : 'Войти'}
           </GradientButton>
         </Toolbar>
       </AppBar>

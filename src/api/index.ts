@@ -3,6 +3,7 @@ import {
   ApiResponse,
   AuthRequest,
   AuthResponse,
+  News,
   PatchWhitelistItemRequest,
   TextRequest,
   UrlRequest,
@@ -11,8 +12,7 @@ import {
 import { AppStore } from '../store';
 
 const Api = axios.create({
-  baseURL: import.meta.env.REACT_APP_API_URL,
-  withCredentials: true
+  baseURL: import.meta.env.VITE_API_URL
 });
 
 // auth
@@ -33,9 +33,9 @@ const addToWhitelist = (data: UrlRequest) => Api.post<WhitelistItem>('/api/admin
 
 // news fetching
 
-const fetchDataByURL = (data: UrlRequest) => Api.post('/api/parser/url/', data);
+const checkURL = (data: UrlRequest) => Api.post<News>('/api/parser/url/', data);
 
-const fetchDataByText = (data: TextRequest) => Api.post('/api/parser/text/', data);
+const checkText = (data: TextRequest) => Api.post<News>('/api/parser/text/', data);
 
 export const injectApiInterceptors = (store: AppStore) => {
   Api.interceptors.request.use(async (req) => {
@@ -48,8 +48,8 @@ export const injectApiInterceptors = (store: AppStore) => {
 };
 
 export default {
-  fetchDataByURL,
-  fetchDataByText,
+  checkURL,
+  checkText,
   signin,
   getWhitelistItems,
   addToWhitelist,

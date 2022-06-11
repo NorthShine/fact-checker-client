@@ -2,6 +2,7 @@ import { AlertColor } from '@mui/material';
 import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit';
 import { ApiResponse } from 'types';
 import { getAuthAction } from '../auth/actionCreators';
+import { checkTextAction, checkUrlAction } from '../news/actionCreators';
 import { addToWhitelistAction, deleteWhitelistItemAction, getWhitelistItemsAction } from '../whitelist/actionCreators';
 
 interface AlertState {
@@ -52,4 +53,7 @@ export const alertReducer = createReducer(initialState, (builder) => {
   builder.addCase(getWhitelistItemsAction.rejected, setApiErrorAlert);
   builder.addCase(addToWhitelistAction.rejected, setApiErrorAlert);
   builder.addCase(deleteWhitelistItemAction.rejected, setApiErrorAlert);
+
+  builder.addCase(checkUrlAction.rejected, setApiErrorAlert);
+  builder.addCase(checkTextAction.rejected, setApiErrorAlert);
 });

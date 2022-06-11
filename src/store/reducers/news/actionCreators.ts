@@ -1,20 +1,37 @@
-// import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { AxiosError } from 'axios';
-// import { getUser } from '../../../api';
-// import { User, ApiError } from '../../../types';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import api from '../../../api';
+import { ApiResponse, News, TextRequest, UrlRequest } from '../../../types';
 
-// export const getNewsAction = createAsyncThunk<User, void, { rejectValue: ApiError }>(
-//   'user/getUserAction',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const response = await getUser();
-//       return response.data;
-//     } catch (err) {
-//       const { response } = err as AxiosError;
-//       return rejectWithValue({
-//         status: response!.status as number,
-//         message: response!.data.message as string
-//       });
-//     }
-//   }
-// );
+export const checkUrlAction = createAsyncThunk<
+  News, UrlRequest, { rejectValue: ApiResponse }>(
+    'news/checkUrl',
+    async (data, { rejectWithValue }) => {
+      try {
+        const response = await api.checkURL(data);
+        return response.data;
+      } catch (error) {
+        const err = (error as ApiResponse);
+        return rejectWithValue({
+          status: err.status,
+          message: err.message
+        });
+      }
+    }
+  );
+
+export const checkTextAction = createAsyncThunk<
+  News, TextRequest, { rejectValue: ApiResponse }>(
+    'news/checkText',
+    async (data, { rejectWithValue }) => {
+      try {
+        const response = await api.checkText(data);
+        return response.data;
+      } catch (error) {
+        const err = (error as ApiResponse);
+        return rejectWithValue({
+          status: err.status,
+          message: err.message
+        });
+      }
+    }
+  );

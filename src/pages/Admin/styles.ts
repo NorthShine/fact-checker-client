@@ -9,7 +9,8 @@ const styles: Styles = {
     paddingRight: '0 !important',
     paddingLeft: '0 !important',
     display: 'flex',
-    gap: 5
+    marginBottom: 20,
+    gap: 10
   }
 };
 
