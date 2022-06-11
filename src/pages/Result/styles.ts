@@ -13,6 +13,10 @@ const styles: Styles = {
     height: 600,
     width: 1000,
   }),
+  headlineResult: {
+    textAlign: "left",
+    padding: 15,
+  },
 };
 
 export default styles;
