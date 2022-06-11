@@ -32,7 +32,7 @@ jobs:
                   script: |
                       cd app
                       npm i
-            - name: Building the Server app
+            - name: Building the app
               uses: appleboy/ssh-action@master
               with:
                   host: ${{ secrets.HOST }}
