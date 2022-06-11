@@ -42,7 +42,7 @@ jobs:
                   script: |
                       cd app
                       npm run build
-            - name: Running the server
+            - name: Running the app
               uses: appleboy/ssh-action@master
               with:
                     host: ${{ secrets.HOST }}
