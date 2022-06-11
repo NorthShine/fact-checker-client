@@ -27,7 +27,7 @@ export const Result: React.FC = () => {
       <Typography css={css.title} variant="h5">Результаты проверки</Typography>
       {data && (
         <TableContainer>
-          <Table aria-label="simple table">
+          <Table size="small">
             <TableHead>
               <TableRow>
                 <TableCell css={css.key}>Параметр</TableCell>
