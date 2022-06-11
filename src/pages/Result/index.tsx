@@ -12,7 +12,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { Navigate } from 'react-router-dom';
+import { Info } from 'components/Info';
 import styles from './styles';
+
+type ResultValue = string | Element | any;
+
+interface Properties {
+  is_real_article: string;
+  is_real_author: string;
+  is_trusted_url: string;
+}
 
 export const Result: React.FC = () => {
   const css = useStyles(styles, 'Result');
@@ -22,9 +31,22 @@ export const Result: React.FC = () => {
     return <Navigate to="/" />;
   }
 
+  const properties: Properties = {
+    is_real_article: 'Настоящая статья',
+    is_real_author: 'Настоящий автор',
+    is_trusted_url: 'Доверенный URL'
+  };
+
+  const {
+    is_real_article,
+    is_real_author,
+    is_trusted_url
+  } = data;
+
   return (
     <Container css={css.root} maxWidth="sm">
       <Typography css={css.title} variant="h5">Результаты проверки</Typography>
+      <Info />
       {data && (
         <TableContainer>
           <Table size="small">
@@ -35,8 +57,12 @@ export const Result: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Object.entries(data).map(([key, value]) => {
-                let result = value;
+              {Object.entries({
+                is_real_article,
+                is_real_author,
+                is_trusted_url
+              }).map(([key, value]) => {
+                let result: ResultValue = value;
                 if (typeof value === 'boolean') {
                   result = value
                     ? <CheckIcon color="primary" />
@@ -48,9 +74,8 @@ export const Result: React.FC = () => {
                     css={css.row}
                   >
                     <TableCell component="th" scope="row">
-                      {key}
+                      {properties[key as keyof Properties]}
                     </TableCell>
-
                     <TableCell align="center">{result}</TableCell>
                   </TableRow>
                 );
