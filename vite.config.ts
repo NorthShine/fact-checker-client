@@ -30,5 +30,6 @@ export default defineConfig({
       types: path.resolve(__dirname, './src/types.ts')
     }
   },
-  envDir: '.'
+  envDir: '.',
+  base: '/web/'
 });
