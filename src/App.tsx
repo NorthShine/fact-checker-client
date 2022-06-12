@@ -26,7 +26,7 @@ const App = () => (
         <AlertProvider>
           <LoaderProvider>
             <ModalProvider>
-              <Router>
+              <Router basename="web">
                 <Routes />
               </Router>
             </ModalProvider>
