@@ -3,7 +3,9 @@ import { injectApiInterceptors } from '../api';
 import { alertReducer } from './reducers/alert/alertReducer';
 import { authReducer } from './reducers/auth/authSlice';
 import { loaderReducer } from './reducers/loader/loaderReducer';
+import { modalReducer } from './reducers/modal/modalReducer';
 import { newsReducer } from './reducers/news/newsSlice';
+import { trustbadgeReducer } from './reducers/trustbadge/trustbadgeSlice';
 import { whitelistReducer } from './reducers/whitelist/whitelistSlice';
 
 const rootReducer = combineReducers({
@@ -11,7 +13,9 @@ const rootReducer = combineReducers({
   auth: authReducer,
   whitelist: whitelistReducer,
   alert: alertReducer,
-  loader: loaderReducer
+  loader: loaderReducer,
+  modal: modalReducer,
+  trustbadge: trustbadgeReducer
 });
 
 export const setupStore = () => configureStore({

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ApiResponse, UrlRequest, WhitelistItem } from 'types';
+import { ApiResponse, PatchWhitelistItemRequest, UrlRequest, WhitelistItem } from 'types';
 import api from '../../../api';
 
 export const getWhitelistItemsAction = createAsyncThunk<
@@ -43,6 +43,23 @@ export const deleteWhitelistItemAction = createAsyncThunk<
       try {
         await api.deleteWhitelistItem(id);
         return id;
+      } catch (error) {
+        const err = (error as ApiResponse);
+        return rejectWithValue({
+          status: err.status,
+          message: err.message
+        });
+      }
+    }
+  );
+
+export const updateWhitelistItemAction = createAsyncThunk<
+  WhitelistItem, PatchWhitelistItemRequest, { rejectValue: ApiResponse }>(
+    'whitelist/updateWhitelistItem',
+    async (data, { rejectWithValue }) => {
+      try {
+        const response = await api.patchWhitelistItem(data);
+        return response.data as WhitelistItem;
       } catch (error) {
         const err = (error as ApiResponse);
         return rejectWithValue({

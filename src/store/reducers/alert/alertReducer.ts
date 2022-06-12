@@ -25,6 +25,15 @@ interface AlertPayload {
 export const openAlertAction = createAction<AlertPayload>('alert/openAlert');
 export const closeAlertAction = createAction('alert/closeAlert');
 
+function setApiSuccessAlert(
+  this: any,
+  state: AlertState
+) {
+  state.message = this.message || 'Success';
+  state.open = true;
+  state.severity = 'success';
+}
+
 const setApiErrorAlert = (
   state: AlertState,
   action: PayloadAction<ApiResponse | undefined>
@@ -52,6 +61,11 @@ export const alertReducer = createReducer(initialState, (builder) => {
 
   builder.addCase(getWhitelistItemsAction.rejected, setApiErrorAlert);
   builder.addCase(addToWhitelistAction.rejected, setApiErrorAlert);
+
+  builder.addCase(
+    deleteWhitelistItemAction.fulfilled,
+    setApiSuccessAlert.bind({ message: 'Ресурс успешно удален!' })
+  );
   builder.addCase(deleteWhitelistItemAction.rejected, setApiErrorAlert);
 
   builder.addCase(checkUrlAction.rejected, setApiErrorAlert);

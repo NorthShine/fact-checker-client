@@ -2,7 +2,7 @@ import { Fade } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useStyles } from 'hooks/useStyles';
 import React from 'react';
-import { FADE_TIMEOUT } from '../../constants';
+import { FADE_TIMEOUT } from '../../../constants';
 import styles from './styles';
 
 export const Loader: React.FC = () => {

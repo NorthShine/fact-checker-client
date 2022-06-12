@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import { Container } from '@mui/system';
-import { Whitelist } from 'components/Whitelist';
+import { Whitelist } from 'components/common/Whitelist';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useStyles } from 'hooks/useStyles';
 import React, { useEffect, useState } from 'react';

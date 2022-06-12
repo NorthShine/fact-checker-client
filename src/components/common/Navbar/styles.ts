@@ -1,7 +1,11 @@
 import type { Styles } from 'types';
 
 const styles: Styles = {
-  root: { width: '100%', bgcolor: 'background.paper' }
+  logo: {
+    height: 30,
+    marginRight: 10,
+    cursor: 'pointer'
+  }
 };
 
 export default styles;

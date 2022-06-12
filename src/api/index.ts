@@ -6,6 +6,7 @@ import {
   NewsResponse,
   PatchWhitelistItemRequest,
   TextRequest,
+  TrustBadgeRequest,
   UrlRequest,
   WhitelistItem
 } from 'types';
@@ -25,11 +26,15 @@ const getWhitelistItems = () => Api.get<WhitelistItem[] | ApiResponse>('/api/adm
 
 const getWhitelistItem = (id: number) => Api.get<WhitelistItem | ApiResponse>(`/api/admin/whitelist/${id}`);
 
-const patchWhitelistItem = ({ id, data }: PatchWhitelistItemRequest) => Api.post<WhitelistItem | ApiResponse>(`/api/admin/whitelist/${id}`, data);
+const patchWhitelistItem = ({ id, data }: PatchWhitelistItemRequest) => Api.patch<WhitelistItem | ApiResponse>(`/api/admin/whitelist/${id}`, data);
 
 const deleteWhitelistItem = (id: number) => Api.delete(`/api/admin/whitelist/${id}`);
 
 const addToWhitelist = (data: UrlRequest) => Api.post<WhitelistItem>('/api/admin/whitelist', data);
+
+// trustbadge
+
+const fetchTrustBadgeScript = (data: TrustBadgeRequest) => Api.post<WhitelistItem>('/api/trustbadge/', data);
 
 // news fetching
 
@@ -55,5 +60,6 @@ export default {
   addToWhitelist,
   getWhitelistItem,
   patchWhitelistItem,
-  deleteWhitelistItem
+  deleteWhitelistItem,
+  fetchTrustBadgeScript
 };
