@@ -14,7 +14,7 @@ export const Info: React.FC = () => {
         <Typography align="left" variant="subtitle1" css={css.title}>{data?.title}</Typography>
         {data?.url
           && (
-            <a css={css.link} href={data.url}>
+            <a target="_blank" css={css.link} href={data.url} rel="noreferrer">
               <Typography
                 align="left"
                 css={css.url}
