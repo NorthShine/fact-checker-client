@@ -1,5 +1,6 @@
 import { CSSObject } from '@emotion/react';
 import { Palette, PaletteColor, Theme } from '@mui/material';
+import { WhitelistParams } from 'types';
 
 export const createGradientStyles = (variant: keyof Palette) => (theme: Theme): CSSObject => {
   const color = theme.palette[variant] as PaletteColor;
@@ -33,4 +34,12 @@ export const createGradientStyles = (variant: keyof Palette) => (theme: Theme): 
       filter: 'blur(15px)'
     }
   };
+};
+
+export const createSearchURLParams = (data: WhitelistParams): string => {
+  const params = new URLSearchParams();
+  Object.entries(data).forEach(([key, value]) => {
+    params.append(key, value);
+  });
+  return params.toString();
 };

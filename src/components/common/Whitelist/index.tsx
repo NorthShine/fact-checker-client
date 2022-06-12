@@ -44,14 +44,16 @@ export const Whitelist: React.FC = () => {
           <WhitelistItem key={props!.id} {...props} />
         ))}
       </List>
-      <Pagination
-        css={css.pagination}
-        page={page ?? 1}
-        boundaryCount={3}
-        count={last_page}
-        onChange={handlePageClick}
-        color="primary"
-      />
+      {page && Boolean(items.length) && (
+        <Pagination
+          css={css.pagination}
+          page={page ?? 1}
+          boundaryCount={3}
+          count={last_page}
+          onChange={handlePageClick}
+          color="primary"
+        />
+      )}
     </>
   );
 };

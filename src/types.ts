@@ -72,11 +72,17 @@ export interface News {
   text?: string;
   is_article?: boolean;
   truth_percentage: number;
-  uniqueness_hits: number
+  uniqueness_hits: number;
+  found_articles: string[];
 }
 
 export interface NewsResponse {
   data: News;
+}
+
+export interface Analytics {
+  count: number;
+  url: string;
 }
 
 export interface TrustBadgeResponse {

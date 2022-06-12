@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { Navigate } from 'react-router-dom';
 import { Info } from 'components/common/Info';
+import { Articles } from 'components/common/Articles';
 import styles from './styles';
 
 type ResultValue = string | Element | any;
@@ -21,6 +22,8 @@ interface Properties {
   is_real_article: string;
   is_real_author: string;
   is_trusted_url: string;
+  uniqueness_hits: string;
+  stats: string;
 }
 
 export const Result: React.FC = () => {
@@ -34,13 +37,16 @@ export const Result: React.FC = () => {
   const properties: Properties = {
     is_real_article: 'Настоящая статья',
     is_real_author: 'Настоящий автор',
-    is_trusted_url: 'Доверенный URL'
+    is_trusted_url: 'Доверенный URL',
+    uniqueness_hits: 'Уникальность статьи',
+    stats: 'Провеки ресурса'
   };
 
   const {
     is_real_article,
     is_real_author,
-    is_trusted_url
+    is_trusted_url,
+    uniqueness_hits
   } = data;
 
   return (
@@ -60,7 +66,8 @@ export const Result: React.FC = () => {
               {Object.entries({
                 is_real_article,
                 is_real_author,
-                is_trusted_url
+                is_trusted_url,
+                uniqueness_hits: `${uniqueness_hits}%`
               }).map(([key, value]) => {
                 let result: ResultValue = value;
                 if (typeof value === 'boolean') {
@@ -84,6 +91,7 @@ export const Result: React.FC = () => {
           </Table>
         </TableContainer>
       )}
+      <Articles />
     </Container>
   );
 };

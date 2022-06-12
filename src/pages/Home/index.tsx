@@ -6,13 +6,15 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import TextField from '@mui/material/TextField';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
+import { Analytics } from 'components/common/Analytics';
 import styles from './styles';
 import { GradientButton } from '../../ui/GradientButton';
 import { checkTextAction, checkUrlAction } from '../../store/reducers/news/actionCreators';
 import { FADE_TIMEOUT } from '../../constants';
+import { getAnalyticsAction } from '../../store/reducers/analytics/actionCreators';
 
 type TabType = 'url' | 'text';
 
@@ -26,6 +28,10 @@ export const Home: React.FC = () => {
     text: '',
     title: '',
     author: ''
+  });
+
+  useEffect(() => {
+    dispatch(getAnalyticsAction());
   });
 
   const handleChange = (event: React.SyntheticEvent, value: TabType) => {
@@ -140,6 +146,7 @@ export const Home: React.FC = () => {
           </Fade>
         </TabPanel>
       </TabContext>
+      <Analytics />
     </Container>
   );
 };

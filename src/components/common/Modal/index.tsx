@@ -8,7 +8,7 @@ import { closeModalAction } from '../../../store/reducers/modal/modalReducer';
 import { getTrustBadgeScriptAction } from '../../../store/reducers/trustbadge/actionCreators';
 
 const headers = {
-  [getTrustBadgeScriptAction.fulfilled.type]: 'Код Trust Badge'
+  [getTrustBadgeScriptAction.fulfilled.type]: 'Trust Badge'
 };
 
 const contents = {

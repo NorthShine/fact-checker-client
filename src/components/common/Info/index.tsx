@@ -54,16 +54,16 @@ export const Info: React.FC = () => {
               </a>
             )}
           <Typography align="left" css={css.text}>{text}</Typography>
-          {!is_article && (
-            <Alert css={css.alert} severity="error">
-              Источник не является статьей!
-            </Alert>
-          )}
         </Container>
         <Paper css={resultStyles}>
           <Typography css={css.result} variant="h3">{`${truth_percentage}%`}</Typography>
         </Paper>
       </CardContent>
+      {(url && !is_article) && (
+        <Alert css={css.alert} severity="error">
+          Источник не является статьей!
+        </Alert>
+      )}
     </Card>
   );
 };

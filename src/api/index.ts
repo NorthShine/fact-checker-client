@@ -3,17 +3,18 @@ import {
   ApiResponse,
   AuthRequest,
   AuthResponse,
+  Analytics,
   NewsResponse,
   PatchWhitelistItemRequest,
   TextRequest,
   TrustBadgeRequest,
   UrlRequest,
   WhitelistItem,
-  WhitelistParams,
   WhitelistRequest,
   WhitelistResponse
 } from 'types';
 import { AppStore } from '../store';
+import { createSearchURLParams } from '../utils';
 
 const Api = axios.create({
   baseURL: import.meta.env.VITE_API_URL
@@ -24,14 +25,6 @@ const Api = axios.create({
 const signin = (data: AuthRequest) => Api.post<AuthResponse | ApiResponse>('/api/admin/sign_in', data);
 
 // whitelist
-
-const createSearchURLParams = (data: WhitelistParams): string => {
-  const params = new URLSearchParams();
-  Object.entries(data).forEach(([key, value]) => {
-    params.append(key, value);
-  });
-  return params.toString();
-};
 
 const getWhitelistItems = (data: WhitelistRequest) => Api.get<WhitelistResponse | ApiResponse>(
   `/api/admin/whitelist${data ? `?${createSearchURLParams(data)}` : ''}`
@@ -62,6 +55,8 @@ const checkURL = (data: UrlRequest) => Api.post<NewsResponse>('/api/parser/url',
 
 const checkText = (data: TextRequest) => Api.post<NewsResponse>('/api/parser/text', data);
 
+const getAnalytics = () => Api.get<Analytics[]>('/api/statistics/checks_per_site');
+
 export const injectApiInterceptors = (store: AppStore) => {
   Api.interceptors.request.use(async (req) => {
     const { token } = store.getState().auth;
@@ -81,5 +76,6 @@ export default {
   getWhitelistItem,
   patchWhitelistItem,
   deleteWhitelistItem,
-  fetchTrustBadgeScript
+  fetchTrustBadgeScript,
+  getAnalytics
 };

@@ -13,12 +13,21 @@ export const TrustBadgeModal: React.FC = () => {
 
   return (
     <Container>
-      <Typography>Скопируйте код, чтобы Trust Badge отобразился на вашем сайте:</Typography>
+      <Typography>
+        Чтобы люди видели, что ваш сайт проверен нашим сервисом,
+        вы можете добавить Trust Badge:
+      </Typography>
       <Container css={css.trustbadge}>
-        <img css={css.image} alt="trsutbadge" src={TrustBadge} />
+        <img css={css.image} alt="trustbadge" src={TrustBadge} />
       </Container>
-      <Typography>Скопируйте код, чтобы Trust Badge отобразился на вашем сайте:</Typography>
+      <Typography>
+        {`Скопируйте код,
+          чтобы Trust Badge отобразился на вашем сайте
+          и вставьте его в <head> страницы:`}
+      </Typography>
       <ScriptField script={script} />
+      <Typography>Поставьте этот HTML-код в месте, где вы хотите отобразить Trust Badge</Typography>
+      <ScriptField script={'<div class="__trustbadge__"></div>'} />
     </Container>
   );
 };

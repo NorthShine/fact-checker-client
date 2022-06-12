@@ -4,7 +4,8 @@ const styles: Styles = {
   trustbadge: {
     padding: '10px 100px !important',
     '@media (max-width: 600px)': {
-      padding: 'inherit'
+      paddingRight: 'inherit !important',
+      paddingLeft: 'inherit !important'
     }
   },
   image: {

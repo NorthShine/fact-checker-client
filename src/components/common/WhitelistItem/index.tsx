@@ -23,7 +23,10 @@ export const WhitelistItem: React.FC<WhitelistItemProps> = (props) => {
   const [value, setValue] = useState(url);
 
   const handleDeleteItem = useCallback(() => {
-    dispatch(deleteWhitelistItemAction(id));
+    const sure = window.confirm('Вы действительно хотите удалить URL?'); // eslint-disable-line
+    if (sure) {
+      dispatch(deleteWhitelistItemAction(id));
+    }
   }, []);
 
   const handleSetItemEditing = useCallback(() => {

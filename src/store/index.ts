@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { injectApiInterceptors } from '../api';
 import { alertReducer } from './reducers/alert/alertReducer';
+import { analyticsReducer } from './reducers/analytics/analyticsSlice';
 import { authReducer } from './reducers/auth/authSlice';
 import { loaderReducer } from './reducers/loader/loaderReducer';
 import { modalReducer } from './reducers/modal/modalReducer';
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   alert: alertReducer,
   loader: loaderReducer,
   modal: modalReducer,
-  trustbadge: trustbadgeReducer
+  trustbadge: trustbadgeReducer,
+  analytics: analyticsReducer
 });
 
 export const setupStore = () => configureStore({
