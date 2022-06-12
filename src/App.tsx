@@ -1,4 +1,5 @@
 import '@fontsource/commissioner';
+import '@fontsource/roboto-mono';
 import { Provider as StateProvider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
@@ -9,6 +10,7 @@ import { theme } from './theme';
 import Routes from './routes';
 import { AlertProvider } from './providers/AlertProvider';
 import { LoaderProvider } from './providers/LoaderProvider';
+import { ModalProvider } from './providers/ModalProvider';
 
 const cache = createCache({
   key: 'css',
@@ -21,9 +23,11 @@ const App = () => (
       <StateProvider store={store}>
         <AlertProvider>
           <LoaderProvider>
-            <Router>
-              <Routes />
-            </Router>
+            <ModalProvider>
+              <Router>
+                <Routes />
+              </Router>
+            </ModalProvider>
           </LoaderProvider>
         </AlertProvider>
       </StateProvider>

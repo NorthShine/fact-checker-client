@@ -12,7 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { Navigate } from 'react-router-dom';
-import { Info } from 'components/Info';
+import { Info } from 'components/common/Info';
 import styles from './styles';
 
 type ResultValue = string | Element | any;

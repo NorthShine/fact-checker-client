@@ -25,6 +25,8 @@ export interface ApiError {
 export interface WhitelistItem {
   id: number;
   url: string;
+  editing: boolean;
+  script?: string;
 }
 
 export interface PatchWhitelistItemData {
@@ -73,4 +75,12 @@ export interface News {
 
 export interface NewsResponse {
   data: News;
+}
+
+export interface TrustBadgeResponse {
+  script: string
+}
+
+export interface TrustBadgeRequest {
+  id: number;
 }
