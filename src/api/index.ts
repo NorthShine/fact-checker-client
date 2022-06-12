@@ -8,7 +8,10 @@ import {
   TextRequest,
   TrustBadgeRequest,
   UrlRequest,
-  WhitelistItem
+  WhitelistItem,
+  WhitelistParams,
+  WhitelistRequest,
+  WhitelistResponse
 } from 'types';
 import { AppStore } from '../store';
 
@@ -22,11 +25,28 @@ const signin = (data: AuthRequest) => Api.post<AuthResponse | ApiResponse>('/api
 
 // whitelist
 
-const getWhitelistItems = () => Api.get<WhitelistItem[] | ApiResponse>('/api/admin/whitelist');
+const createSearchURLParams = (data: WhitelistParams): string => {
+  const params = new URLSearchParams();
+  Object.entries(data).forEach(([key, value]) => {
+    params.append(key, value);
+  });
+  return params.toString();
+};
 
-const getWhitelistItem = (id: number) => Api.get<WhitelistItem | ApiResponse>(`/api/admin/whitelist/${id}`);
+const getWhitelistItems = (data: WhitelistRequest) => Api.get<WhitelistResponse | ApiResponse>(
+  `/api/admin/whitelist${data ? `?${createSearchURLParams(data)}` : ''}`
+);
 
-const patchWhitelistItem = ({ id, data }: PatchWhitelistItemRequest) => Api.patch<WhitelistItem | ApiResponse>(`/api/admin/whitelist/${id}`, data);
+const getWhitelistItem = (id: number) => Api.get<WhitelistItem | ApiResponse>(
+  `/api/admin/whitelist/${id}`
+);
+
+const patchWhitelistItem = ({ id, data }: PatchWhitelistItemRequest) => Api.patch<
+  WhitelistItem | ApiResponse
+>(
+  `/api/admin/whitelist/${id}`,
+  data
+);
 
 const deleteWhitelistItem = (id: number) => Api.delete(`/api/admin/whitelist/${id}`);
 

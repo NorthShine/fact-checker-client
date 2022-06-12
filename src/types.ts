@@ -71,6 +71,8 @@ export interface News {
   title?: string | null;
   text?: string;
   is_article?: boolean;
+  truth_percentage: number;
+  uniqueness_hits: number
 }
 
 export interface NewsResponse {
@@ -84,3 +86,22 @@ export interface TrustBadgeResponse {
 export interface TrustBadgeRequest {
   id: number;
 }
+
+export interface WhitelistResponse {
+  data: WhitelistItem[];
+  last_page: number;
+  page: number | null;
+  per_page: number;
+}
+
+export interface WhitelistActionPayload extends WhitelistResponse {
+  query?: string;
+}
+
+export interface WhitelistParams {
+  q?: string;
+  page?: number;
+  per_page?: number;
+}
+
+export type WhitelistRequest = WhitelistParams | undefined;

@@ -1,6 +1,5 @@
 import { AlertColor } from '@mui/material';
 import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { ApiResponse } from 'types';
 import { getAuthAction } from '../auth/actionCreators';
 import { checkTextAction, checkUrlAction } from '../news/actionCreators';
 import { addToWhitelistAction, deleteWhitelistItemAction, getWhitelistItemsAction } from '../whitelist/actionCreators';
@@ -25,24 +24,21 @@ interface AlertPayload {
 export const openAlertAction = createAction<AlertPayload>('alert/openAlert');
 export const closeAlertAction = createAction('alert/closeAlert');
 
-function setApiSuccessAlert(
-  this: any,
-  state: AlertState
-) {
-  state.message = this.message || 'Success';
-  state.open = true;
-  state.severity = 'success';
+interface ApiAlertContext {
+  message?: string;
+  severity: AlertColor;
 }
 
-const setApiErrorAlert = (
+function setApiAlert(
+  this: ApiAlertContext,
   state: AlertState,
-  action: PayloadAction<ApiResponse | undefined>
-) => {
-  const message = action.payload?.message;
-  state.message = message || 'Error';
+  action: PayloadAction<any>
+) {
+  const { message } = action.payload;
+  state.message = this.message || message || '';
   state.open = true;
-  state.severity = 'error';
-};
+  state.severity = this.severity;
+}
 
 export const alertReducer = createReducer(initialState, (builder) => {
   builder.addCase(openAlertAction, (state, action) => {
@@ -57,17 +53,33 @@ export const alertReducer = createReducer(initialState, (builder) => {
 
   // alert listeners
 
-  builder.addCase(getAuthAction.rejected, setApiErrorAlert);
+  builder.addCase(getAuthAction.rejected, setApiAlert.bind({
+    severity: 'error',
+    message: 'Ошибка авторизации'
+  }));
 
-  builder.addCase(getWhitelistItemsAction.rejected, setApiErrorAlert);
-  builder.addCase(addToWhitelistAction.rejected, setApiErrorAlert);
+  builder.addCase(getWhitelistItemsAction.rejected, setApiAlert.bind({
+    severity: 'error'
+  }));
+  builder.addCase(addToWhitelistAction.rejected, setApiAlert.bind({
+    severity: 'error'
+  }));
 
   builder.addCase(
     deleteWhitelistItemAction.fulfilled,
-    setApiSuccessAlert.bind({ message: 'Ресурс успешно удален!' })
+    setApiAlert.bind({
+      severity: 'success',
+      message: 'Ресурс успешно удален!'
+    })
   );
-  builder.addCase(deleteWhitelistItemAction.rejected, setApiErrorAlert);
+  builder.addCase(deleteWhitelistItemAction.rejected, setApiAlert.bind({
+    severity: 'error'
+  }));
 
-  builder.addCase(checkUrlAction.rejected, setApiErrorAlert);
-  builder.addCase(checkTextAction.rejected, setApiErrorAlert);
+  builder.addCase(checkUrlAction.rejected, setApiAlert.bind({
+    severity: 'error'
+  }));
+  builder.addCase(checkTextAction.rejected, setApiAlert.bind({
+    severity: 'error'
+  }));
 });

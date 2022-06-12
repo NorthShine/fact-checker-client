@@ -1,35 +1,69 @@
-import { Alert, Paper, Typography } from '@mui/material';
+import { Alert, Card, CardContent, Container, Paper, Typography } from '@mui/material';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { useStyles } from 'hooks/useStyles';
-import React, { Suspense } from 'react';
+import React from 'react';
 import styles from './styles';
+
+const getResultLabelClass = (result: number) => {
+  switch (true) {
+    case result < 50:
+      return 'error';
+    case result > 51 && result < 89:
+      return 'warning';
+    default: {
+      return 'success';
+    }
+  }
+};
 
 export const Info: React.FC = () => {
   const css = useStyles(styles, 'Info');
   const { data } = useAppSelector((state) => state.news);
 
+  if (!data) return null;
+
+  const {
+    truth_percentage,
+    title,
+    url,
+    text,
+    is_article
+  } = data;
+
+  const resultClass = getResultLabelClass(truth_percentage);
+
+  const resultStyles = [
+    css.resultContainer,
+    css[resultClass]
+  ];
+
   return (
-    <Suspense fallback={null}>
-      <Paper css={css.root} elevation={1}>
-        <Typography align="left" variant="subtitle1" css={css.title}>{data?.title}</Typography>
-        {data?.url
-          && (
-            <a target="_blank" css={css.link} href={data.url} rel="noreferrer">
-              <Typography
-                align="left"
-                css={css.url}
-              >
-                {data.url}
-              </Typography>
-            </a>
+    <Card css={css.root}>
+      <CardContent css={css.content}>
+        <Container css={css.infoContainer}>
+          <Typography align="left" variant="subtitle1" css={css.title}>{title}</Typography>
+          {url
+            && (
+              <a target="_blank" css={css.link} href={url} rel="noreferrer">
+                <Typography
+                  align="left"
+                  css={css.url}
+                >
+                  {url}
+                </Typography>
+              </a>
+            )}
+          <Typography align="left" css={css.text}>{text}</Typography>
+          {!is_article && (
+            <Alert css={css.alert} severity="error">
+              Источник не является статьей!
+            </Alert>
           )}
-        <Typography align="left" css={css.text}>{data?.text}</Typography>
-        {(typeof data?.is_article === 'boolean' && !data.is_article) && (
-          <Alert css={css.alert} severity="error">
-            Источник не является статьей!
-          </Alert>
-        )}
-      </Paper>
-    </Suspense>
+        </Container>
+        <Paper css={resultStyles}>
+          <Typography css={css.result} variant="h3">{`${truth_percentage}%`}</Typography>
+        </Paper>
+      </CardContent>
+    </Card>
   );
 };

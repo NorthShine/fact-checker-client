@@ -6,6 +6,9 @@ const styles: Styles = {
     display: 'flex',
     gap: 10,
     padding: '10px 0'
+  },
+  pagination: {
+    padding: 10
   }
 };
 

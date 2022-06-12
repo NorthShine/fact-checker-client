@@ -2,17 +2,20 @@ import { Button, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import { Whitelist } from 'components/common/Whitelist';
 import { useAppDispatch } from 'hooks/useAppDispatch';
+import { useAppSelector } from 'hooks/useAppSelector';
 import { useStyles } from 'hooks/useStyles';
 import React, { useEffect, useState } from 'react';
-import { addToWhitelistAction, getWhitelistItemsAction } from '../../store/reducers/whitelist/actionCreators';
-import { filterWhitelistItemsAction } from '../../store/reducers/whitelist/whitelistSlice';
+import {
+  addToWhitelistAction,
+  getWhitelistItemsAction
+} from '../../store/reducers/whitelist/actionCreators';
 import styles from './styles';
 
 export const Admin: React.FC = () => {
   const css = useStyles(styles, 'Admin');
   const [url, setUrl] = useState('');
-  const [search, setSearch] = useState('');
   const dispatch = useAppDispatch();
+  const { query } = useAppSelector((state) => state.whitelist);
 
   useEffect(() => {
     dispatch(getWhitelistItemsAction());
@@ -20,8 +23,10 @@ export const Admin: React.FC = () => {
 
   const handleSearch = (event: React.SyntheticEvent) => {
     const { value } = (event.target as HTMLInputElement);
-    setSearch(value);
-    dispatch(filterWhitelistItemsAction(value));
+    dispatch(getWhitelistItemsAction({
+      q: value,
+      page: 1
+    }));
   };
 
   const handleInputChange = (event: React.SyntheticEvent) => {
@@ -58,7 +63,7 @@ export const Admin: React.FC = () => {
         </Container>
       </form>
       <TextField
-        value={search}
+        value={query ?? ''}
         onChange={handleSearch}
         label="Поиск"
         fullWidth

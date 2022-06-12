@@ -1,14 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ApiResponse, PatchWhitelistItemRequest, UrlRequest, WhitelistItem } from 'types';
+import {
+  ApiResponse,
+  PatchWhitelistItemRequest,
+  UrlRequest,
+  WhitelistActionPayload,
+  WhitelistItem,
+  WhitelistRequest
+} from 'types';
 import api from '../../../api';
 
 export const getWhitelistItemsAction = createAsyncThunk<
-  WhitelistItem[], void, { rejectValue: ApiResponse }>(
+  WhitelistActionPayload, WhitelistRequest, { rejectValue: ApiResponse }>(
     'whitelist/getWhitelistItems',
-    async (_, { rejectWithValue }) => {
+    async (param, { rejectWithValue }) => {
       try {
-        const response = await api.getWhitelistItems();
-        return response.data as WhitelistItem[];
+        const query = param?.q;
+        const response = await api.getWhitelistItems(param);
+        return { ...response.data, query } as WhitelistActionPayload;
       } catch (error) {
         const err = (error as ApiResponse);
         return rejectWithValue({
@@ -21,7 +29,7 @@ export const getWhitelistItemsAction = createAsyncThunk<
 
 export const addToWhitelistAction = createAsyncThunk<
   WhitelistItem, UrlRequest, { rejectValue: ApiResponse }>(
-    'auth/addToWhitelist',
+    'whitelist/addToWhitelist',
     async (data, { rejectWithValue }) => {
       try {
         const response = await api.addToWhitelist(data);

@@ -1,21 +1,28 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { addToWhitelistAction, deleteWhitelistItemAction, getWhitelistItemsAction, updateWhitelistItemAction } from './actionCreators';
-import { ApiError, WhitelistItem } from '../../../types';
+import { ApiError, WhitelistActionPayload, WhitelistItem } from '../../../types';
+import { MAX_PAGE_ELEMENTS } from '../../../constants';
 
 interface WhitelistState {
   items: WhitelistItem[];
   requesting: boolean;
+  request: string;
   error: ApiError | null | undefined;
-  filtered: number[]
-  script?: string | undefined
+  per_page: number;
+  last_page: number;
+  page: number | null;
+  query: string | undefined;
 }
 
 const initialState: WhitelistState = {
   items: [],
-  requesting: true,
+  requesting: false,
+  request: '',
   error: null,
-  filtered: [],
-  script: undefined
+  per_page: MAX_PAGE_ELEMENTS,
+  last_page: 0,
+  page: 1,
+  query: ''
 };
 
 export const filterWhitelistItemsAction = createAction<string>('whitelist/filterWhitelistItems');
@@ -51,23 +58,23 @@ export const whitelistSlice = createSlice({
       });
     });
 
-    builder.addCase(filterWhitelistItemsAction, (state, action) => {
-      const value = action.payload.toLowerCase();
-      state.filtered = state.items.reduce((acc: number[], item) => {
-        const url = item.url.toLowerCase();
-        if (url.includes(value)) {
-          acc.push(item.id);
-        }
-        return acc;
-      }, []);
-    });
-
     builder.addCase(
       getWhitelistItemsAction.fulfilled,
-      (state, action: PayloadAction<WhitelistItem[]>) => {
+      (state, action: PayloadAction<WhitelistActionPayload>) => {
         state.requesting = false;
         state.error = null;
-        state.items = action.payload.map((item) => ({
+        const {
+          data: items,
+          per_page,
+          last_page,
+          page,
+          query
+        } = action.payload;
+        state.per_page = per_page;
+        state.last_page = last_page;
+        state.page = page;
+        state.query = query;
+        state.items = items.map((item) => ({
           ...item,
           editing: false
         }));
@@ -75,6 +82,7 @@ export const whitelistSlice = createSlice({
     );
     builder.addCase(getWhitelistItemsAction.pending, (state) => {
       state.requesting = true;
+      state.request = 'whitelist/getWhitelistItems';
     });
     builder.addCase(getWhitelistItemsAction.rejected, (state, action) => {
       state.requesting = false;
@@ -83,17 +91,14 @@ export const whitelistSlice = createSlice({
 
     builder.addCase(
       addToWhitelistAction.fulfilled,
-      (state, action: PayloadAction<WhitelistItem>) => {
+      (state) => {
         state.requesting = false;
         state.error = null;
-        state.items.push({
-          ...action.payload,
-          editing: false
-        });
       }
     );
     builder.addCase(addToWhitelistAction.pending, (state) => {
       state.requesting = true;
+      state.request = 'whitelist/addToWhitelist';
     });
     builder.addCase(addToWhitelistAction.rejected, (state, action) => {
       state.requesting = false;
@@ -102,16 +107,14 @@ export const whitelistSlice = createSlice({
 
     builder.addCase(
       deleteWhitelistItemAction.fulfilled,
-      (state, action: PayloadAction<number>) => {
+      (state) => {
         state.requesting = false;
         state.error = null;
-        const id = action.payload;
-        const index = state.items.findIndex((item) => item.id === id);
-        state.items.splice(index, 1);
       }
     );
     builder.addCase(deleteWhitelistItemAction.pending, (state) => {
       state.requesting = true;
+      state.request = 'whitelist/deleteWhitelistItem';
     });
     builder.addCase(deleteWhitelistItemAction.rejected, (state, action) => {
       state.requesting = false;
@@ -132,6 +135,7 @@ export const whitelistSlice = createSlice({
     );
     builder.addCase(updateWhitelistItemAction.pending, (state) => {
       state.requesting = true;
+      state.request = 'whitelist/updateWhitelistItem';
     });
     builder.addCase(updateWhitelistItemAction.rejected, (state, action) => {
       state.requesting = false;
