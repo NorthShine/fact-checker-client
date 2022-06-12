@@ -31,5 +31,5 @@ export default defineConfig({
     }
   },
   envDir: '.',
-  base: './web/'
+  base: '/web/'
 });
