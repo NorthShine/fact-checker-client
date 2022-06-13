@@ -11,7 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useAppSelector } from 'hooks/useAppSelector';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Info } from 'components/Info';
 import { Articles } from 'components/Articles';
 import { useQuery } from 'hooks/useQuery';
@@ -31,20 +31,19 @@ interface Properties {
 
 export const Result: React.FC = () => {
   const css = useStyles(styles, 'Result');
-  const { data, error } = useAppSelector((state) => state.news);
+  const { data } = useAppSelector((state) => state.news);
   const query = useQuery();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = query.get('url');
-    if (url) {
+    if (!data && url) {
       dispatch(checkUrlAction({ url }));
+    } else {
+      navigate('/');
     }
   }, []);
-
-  if (error && !data) {
-    return <Navigate to="/" />;
-  }
 
   if (!data) {
     return null;
