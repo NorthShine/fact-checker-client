@@ -1,7 +1,7 @@
 import { Snackbar, SnackbarOrigin, Alert as Notification } from '@mui/material';
 import { useAlert } from 'hooks/useAlert';
 import { useMemo } from 'react';
-import { DEFAULT_ALERT_TIMEOUT } from '../../../constants';
+import { DEFAULT_ALERT_TIMEOUT } from '../../constants';
 
 export const Alert = () => {
   const { open, closeAlert, message, severity } = useAlert();

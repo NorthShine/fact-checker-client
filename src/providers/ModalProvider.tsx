@@ -1,4 +1,4 @@
-import { Modal } from 'components/common/Modal';
+import { Modal } from 'components/Modal';
 import React from 'react';
 
 interface ModalProviderProps {

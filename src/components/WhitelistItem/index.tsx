@@ -11,10 +11,10 @@ import { Divider, TextField, Tooltip } from '@mui/material';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useStyles } from 'hooks/useStyles';
 import { WhitelistItem as WhitelistItemProps } from 'types';
-import { deleteWhitelistItemAction, updateWhitelistItemAction } from '../../../store/reducers/whitelist/actionCreators';
+import { deleteWhitelistItemAction, updateWhitelistItemAction } from '../../store/reducers/whitelist/actionCreators';
 import styles from './styles';
-import { disableWhitelistItemEditingAction, enableWhitelistItemEditingAction } from '../../../store/reducers/whitelist/whitelistSlice';
-import { getTrustBadgeScriptAction } from '../../../store/reducers/trustbadge/actionCreators';
+import { disableWhitelistItemEditingAction, enableWhitelistItemEditingAction } from '../../store/reducers/whitelist/whitelistSlice';
+import { getTrustBadgeScriptAction } from '../../store/reducers/trustbadge/actionCreators';
 
 export const WhitelistItem: React.FC<WhitelistItemProps> = (props) => {
   const { url, id, editing } = props;

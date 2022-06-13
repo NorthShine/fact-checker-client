@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
-import { Analytics } from 'components/common/Analytics';
+import { Analytics } from 'components/Analytics';
 import styles from './styles';
 import { GradientButton } from '../../ui/GradientButton';
 import { checkTextAction, checkUrlAction } from '../../store/reducers/news/actionCreators';

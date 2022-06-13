@@ -2,10 +2,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { useAppDispatch } from 'hooks/useAppDispatch';
-import { TrustBadgeModal } from 'components/modals/TrustBadge';
 import React from 'react';
-import { closeModalAction } from '../../../store/reducers/modal/modalReducer';
-import { getTrustBadgeScriptAction } from '../../../store/reducers/trustbadge/actionCreators';
+import { TrustBadgeModal } from '../../modals/TrustBadge';
+import { closeModalAction } from '../../store/reducers/modal/modalReducer';
+import { getTrustBadgeScriptAction } from '../../store/reducers/trustbadge/actionCreators';
 
 const headers = {
   [getTrustBadgeScriptAction.fulfilled.type]: 'Trust Badge'

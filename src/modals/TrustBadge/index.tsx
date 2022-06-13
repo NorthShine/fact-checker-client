@@ -1,10 +1,10 @@
 import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
-import { ScriptField } from 'components/common/ScriptField';
+import { ScriptField } from 'components/ScriptField';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { useStyles } from 'hooks/useStyles';
 import React from 'react';
-import TrustBadge from '../../../assets/images/trustbadge.png';
+import TrustBadge from '../../assets/images/trustbadge.png';
 import styles from './styles';
 
 export const TrustBadgeModal: React.FC = () => {

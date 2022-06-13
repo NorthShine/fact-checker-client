@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
 import { useStyles } from 'hooks/useStyles';
-import { GradientButton } from '../../../ui/GradientButton';
-import { signOutAction } from '../../../store/reducers/auth/authSlice';
-import Logo from '../../../assets/images/logo.png';
+import { GradientButton } from '../../ui/GradientButton';
+import { signOutAction } from '../../store/reducers/auth/authSlice';
+import Logo from '../../assets/images/logo.png';
 import styles from './styles';
 
 export const Navbar = () => {

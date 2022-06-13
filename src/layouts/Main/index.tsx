@@ -1,4 +1,4 @@
-import { Navbar } from 'components/common/Navbar';
+import { Navbar } from 'components/Navbar';
 import { useStyles } from 'hooks/useStyles';
 import React from 'react';
 import { Outlet } from 'react-router-dom';

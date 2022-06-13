@@ -1,5 +1,5 @@
 import type { Styles } from 'types';
-import { createGradientStyles } from '../../../utils';
+import { createGradientStyles } from '../../utils';
 
 const styles: Styles = {
   root: {

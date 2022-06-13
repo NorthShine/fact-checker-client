@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import List from '@mui/material/List';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { useStyles } from 'hooks/useStyles';
-import { WhitelistItem } from 'components/common/WhitelistItem';
+import { WhitelistItem } from 'components/WhitelistItem';
 import { Pagination } from '@mui/material';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import styles from './styles';
-import { getWhitelistItemsAction } from '../../../store/reducers/whitelist/actionCreators';
+import { getWhitelistItemsAction } from '../../store/reducers/whitelist/actionCreators';
 
 export const Whitelist: React.FC = () => {
   const {

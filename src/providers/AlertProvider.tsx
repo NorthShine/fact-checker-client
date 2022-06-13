@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from '../components/common/Alert';
+import { Alert } from '../components/Alert';
 
 interface AlertProviderProps {
   children: React.ReactNode;
