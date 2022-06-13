@@ -3,7 +3,7 @@ import { Container } from '@mui/system';
 import { useStyles } from 'hooks/useStyles';
 import CheckIcon from '@mui/icons-material/Check';
 import CancelIcon from '@mui/icons-material/Cancel';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -14,7 +14,10 @@ import { useAppSelector } from 'hooks/useAppSelector';
 import { Navigate } from 'react-router-dom';
 import { Info } from 'components/Info';
 import { Articles } from 'components/Articles';
+import { useQuery } from 'hooks/useQuery';
+import { useAppDispatch } from 'hooks/useAppDispatch';
 import styles from './styles';
+import { checkUrlAction } from '../../store/reducers/news/actionCreators';
 
 type ResultValue = string | Element | any;
 
@@ -28,10 +31,23 @@ interface Properties {
 
 export const Result: React.FC = () => {
   const css = useStyles(styles, 'Result');
-  const { data } = useAppSelector((state) => state.news);
+  const { data, error } = useAppSelector((state) => state.news);
+  const query = useQuery();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const url = query.get('url');
+    if (url) {
+      dispatch(checkUrlAction({ url }));
+    }
+  }, []);
+
+  if (error && !data) {
+    return <Navigate to="/" />;
+  }
 
   if (!data) {
-    return <Navigate to="/" />;
+    return null;
   }
 
   const properties: Properties = {
